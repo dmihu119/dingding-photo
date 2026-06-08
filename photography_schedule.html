@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>摄影预约档期表</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f7f4ef;
+      color: #2c2c2c;
+    }
+    .schedule-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 16px 44px;
+    }
+    .schedule-hero {
+      background: linear-gradient(135deg, #1f1f1f, #5c4a3b);
+      color: #fff;
+      border-radius: 22px;
+      padding: 28px 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    }
+    .schedule-hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(26px, 5vw, 42px);
+      letter-spacing: .04em;
+    }
+    .schedule-hero p {
+      margin: 0;
+      color: rgba(255,255,255,.82);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin: 18px 0;
+    }
+    .toolbar-left, .toolbar-right { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    button, select, input {
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 15px;
+      background: #fff;
+      color: #333;
+      box-shadow: 0 4px 14px rgba(0,0,0,.07);
+      font-size: 14px;
+      outline: none;
+    }
+    button { cursor: pointer; transition: .2s; }
+    button:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,0,0,.1); }
+    .primary { background: #2b211b; color: #fff; }
+    .danger { background: #9f3a38; color: #fff; }
+    .muted { color: #777; font-size: 13px; }
+    .calendar-box {
+      overflow-x: auto;
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.08);
+      padding: 12px;
+    }
+    table {
+      width: 100%;
+      min-width: 920px;
+      border-collapse: separate;
+      border-spacing: 8px;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #fff;
+      color: #57483d;
+      font-weight: 700;
+      padding: 12px 8px;
+      font-size: 14px;
+    }
+    td {
+      text-align: center;
+      padding: 0;
+      vertical-align: middle;
+    }
+    .time-cell {
+      font-weight: 700;
+      color: #8a7564;
+      white-space: nowrap;
+      font-size: 13px;
+      padding: 10px 6px;
+    }
+    .slot {
+      width: 100%;
+      min-height: 46px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 13px;
+      line-height: 1.2;
+      border: 1px solid transparent;
+      user-select: none;
+    }
+    .available { background: #edf8ef; color: #1f7a3f; border-color: #ccebd4; }
+    .booked { background: #fff0ee; color: #a33b30; border-color: #ffd1cb; }
+    .rest { background: #f0f0f0; color: #777; border-color: #e2e2e2; }
+    .slot small { opacity: .75; font-size: 11px; }
+    .legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 14px 4px 0;
+      color: #666;
+      font-size: 13px;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: -1px; }
+    .dot.available { background: #68c27c; }
+    .dot.booked { background: #dc675c; }
+    .dot.rest { background: #aaa; }
+    .notice {
+      margin-top: 18px;
+      background: #fffaf3;
+      color: #715f4d;
+      border: 1px solid #f1dfc5;
+      padding: 14px 16px;
+      border-radius: 16px;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    @media (max-width: 640px) {
+      .schedule-wrap { padding: 16px 10px 32px; }
+      .schedule-hero { border-radius: 18px; padding: 22px 16px; }
+      button, select, input { width: 100%; }
+      .toolbar-left, .toolbar-right { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <section class="schedule-wrap">
+    <div class="schedule-hero">
+      <h1>摄影预约档期表</h1>
+      <p>查看未来 7 天可预约时间。每天 10:00–20:00，每小时一个档期。绿色表示可预约，红色表示已约满，灰色表示休息/不可约。</p>
+    </div>
+
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <button class="primary" onclick="changeWeek(-7)">上一周</button>
+        <button class="primary" onclick="goToday()">本周/今天</button>
+        <button class="primary" onclick="changeWeek(7)">下一周</button>
+      </div>
+      <div class="toolbar-right">
+        <select id="editMode">
+          <option value="available">点击设为：可预约</option>
+          <option value="booked">点击设为：已约满</option>
+          <option value="rest">点击设为：休息/不可约</option>
+        </select>
+        <button onclick="copySchedule()">复制本周档期</button>
+        <button class="danger" onclick="resetSchedule()">清空本地设置</button>
+      </div>
+    </div>
+
+    <div class="calendar-box">
+      <table id="scheduleTable"></table>
+      <div class="legend">
+        <span><i class="dot available"></i>可预约</span>
+        <span><i class="dot booked"></i>已约满</span>
+        <span><i class="dot rest"></i>休息/不可约</span>
+      </div>
+    </div>
+
+    <div class="notice">
+      使用方法：网站管理员打开页面后，选择右上角状态，再点击对应时间格即可修改档期。数据会保存在当前浏览器本地。<br>
+      客户预约建议：请联系微信 <b>dmihu119</b> 或电话 <b>13816677703</b> 确认最终档期。
+    </div>
+  </section>
+
+  <script>
+    const startHour = 10;
+    const endHour = 20;
+    let weekOffset = 0;
+    const statusText = {
+      available: '可预约',
+      booked: '已约满',
+      rest: '休息'
+    };
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function formatDate(date) {
+      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+    }
+
+    function displayDate(date) {
+      const week = ['周日','周一','周二','周三','周四','周五','周六'][date.getDay()];
+      return `${pad(date.getMonth() + 1)}/${pad(date.getDate())}<br><span class="muted">${week}</span>`;
+    }
+
+    function getWeekDates() {
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      today.setDate(today.getDate() + weekOffset);
+      const day = today.getDay() || 7;
+      const monday = new Date(today);
+      monday.setDate(today.getDate() - day + 1);
+      return Array.from({length: 7}, (_, i) => {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        return d;
+      });
+    }
+
+    function getSlotStatus(dateKey, hour) {
+      const data = JSON.parse(localStorage.getItem('photoSchedule') || '{}');
+      return data[`${dateKey}_${hour}`] || 'available';
+    }
+
+    function setSlotStatus(dateKey, hour, status) {
+      const data = JSON.parse(localStorage.getItem('photoSchedule') || '{}');
+      data[`${dateKey}_${hour}`] = status;
+      localStorage.setItem('photoSchedule', JSON.stringify(data));
+      renderTable();
+    }
+
+    function renderTable() {
+      const dates = getWeekDates();
+      const table = document.getElementById('scheduleTable');
+      let html = '<thead><tr><th>时间</th>';
+      dates.forEach(d => html += `<th>${displayDate(d)}</th>`);
+      html += '</tr></thead><tbody>';
+
+      for (let h = startHour; h < endHour; h++) {
+        html += `<tr><td class="time-cell">${pad(h)}:00-${pad(h + 1)}:00</td>`;
+        dates.forEach(d => {
+          const key = formatDate(d);
+          const status = getSlotStatus(key, h);
+          html += `<td><div class="slot ${status}" onclick="setSlotStatus('${key}', ${h}, document.getElementById('editMode').value)">
+            <strong>${statusText[status]}</strong><small>${key}</small>
+          </div></td>`;
+        });
+        html += '</tr>';
+      }
+      html += '</tbody>';
+      table.innerHTML = html;
+    }
+
+    function changeWeek(days) {
+      weekOffset += days;
+      renderTable();
+    }
+
+    function goToday() {
+      weekOffset = 0;
+      renderTable();
+    }
+
+    function resetSchedule() {
+      if (confirm('确定要清空当前浏览器保存的所有档期设置吗？')) {
+        localStorage.removeItem('photoSchedule');
+        renderTable();
+      }
+    }
+
+    function copySchedule() {
+      const dates = getWeekDates();
+      let text = '摄影预约档期表\n';
+      dates.forEach(d => {
+        const key = formatDate(d);
+        text += `\n${key}\n`;
+        for (let h = startHour; h < endHour; h++) {
+          text += `${pad(h)}:00-${pad(h + 1)}:00 ${statusText[getSlotStatus(key, h)]}\n`;
+        }
+      });
+      navigator.clipboard.writeText(text).then(() => alert('已复制本周档期'));
+    }
+
+    renderTable();
+  </script>
+</body>
+</html>
