@@ -265,3 +265,79 @@ body{
     linear-gradient(90deg, rgba(5,15,32,.58) 0%, rgba(5,15,32,.34) 45%, rgba(5,15,32,.06) 100%),
     linear-gradient(180deg, rgba(5,15,32,.10) 0%, rgba(5,15,32,.05) 55%, rgba(5,15,32,.26) 100%) !important;
 }
+
+
+/* ===== V6 首页文字减少与画面留白优化 ===== */
+.hero{
+  min-height: 760px;
+  height: 92vh;
+}
+
+.hero-content{
+  width: min(560px, 84vw) !important;
+  margin-left: 7vw !important;
+  padding-top: 120px !important;
+}
+
+.hero-content .eyebrow{
+  font-size: clamp(14px, 1.3vw, 18px) !important;
+  line-height: 1.5 !important;
+  font-weight: 500 !important;
+  letter-spacing: .16em !important;
+  margin-bottom: 18px !important;
+  opacity: .92 !important;
+}
+
+.hero-content h1{
+  max-width: 560px !important;
+  font-size: clamp(44px, 5.2vw, 68px) !important;
+  line-height: 1.16 !important;
+  font-weight: 620 !important;
+  letter-spacing: .04em !important;
+}
+
+.hero-content .subtitle{
+  margin-top: 22px !important;
+  font-size: clamp(14px, 1.4vw, 18px) !important;
+  line-height: 1.8 !important;
+  letter-spacing: .06em !important;
+  max-width: 520px !important;
+}
+
+.hero-actions{
+  margin-top: 26px !important;
+}
+
+.hero::before{
+  background:
+    linear-gradient(90deg, rgba(5,15,32,.50) 0%, rgba(5,15,32,.26) 38%, rgba(5,15,32,.02) 100%),
+    linear-gradient(180deg, rgba(5,15,32,.06) 0%, rgba(5,15,32,.02) 58%, rgba(5,15,32,.24) 100%) !important;
+}
+
+@media(max-width: 900px){
+  .hero-content{
+    width: 82vw !important;
+    margin-left: 6vw !important;
+    padding-top: 100px !important;
+  }
+  .hero-content h1{
+    font-size: clamp(38px, 9vw, 52px) !important;
+  }
+}
+
+@media(max-width: 560px){
+  .hero{
+    min-height: 620px !important;
+    height: 82vh !important;
+  }
+  .hero-content{
+    width: 86vw !important;
+    padding-top: 82px !important;
+  }
+  .hero-content h1{
+    font-size: 38px !important;
+  }
+  .hero-content .subtitle{
+    font-size: 14px !important;
+  }
+}
