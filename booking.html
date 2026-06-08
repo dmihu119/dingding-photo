@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>丁叮摄影｜在线预约</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body{background:#0f0f0f;color:#fff;min-height:100vh;}
+    .booking-wrap{max-width:860px;margin:0 auto;padding:110px 20px 50px;text-align:center;}
+    .booking-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:28px;padding:34px 22px;box-shadow:0 20px 80px rgba(0,0,0,.35)}
+    .booking-card h1{font-size:34px;margin:0 0 12px}.booking-card p{color:rgba(255,255,255,.76);line-height:1.8}
+    .mini-code{background:rgba(255,255,255,.1);border:1px dashed rgba(255,255,255,.35);border-radius:16px;padding:14px;margin:22px auto;max-width:580px;word-break:break-all;color:#f5d59a;font-size:15px;}
+    .booking-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}.booking-actions a,.booking-actions button{border:0;text-decoration:none;border-radius:999px;padding:14px 24px;font-size:16px;cursor:pointer}.gold{background:#d7b46a;color:#111}.darkbtn{background:#fff;color:#111}.ghostbtn{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)!important}
+    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px;text-align:left}.step{background:rgba(255,255,255,.07);border-radius:18px;padding:16px}.step b{color:#f5d59a}.step span{display:block;color:rgba(255,255,255,.7);font-size:14px;margin-top:8px;line-height:1.7}
+    @media(max-width:700px){.booking-wrap{padding-top:90px}.booking-card h1{font-size:28px}.steps{grid-template-columns:1fr}.booking-actions a,.booking-actions button{width:100%}}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="index.html"><span>Lethe.丁叮</span><small>流浪摄影师 · 时间记录者</small></a>
+    <nav><a href="index.html#price">套餐查询</a><a href="index.html#contact">联系我</a></nav>
+  </header>
+  <main class="booking-wrap">
+    <section class="booking-card">
+      <h1>在线预约</h1>
+      <p>请在微信里打开本页面，点击下方按钮进入「表预约」小程序。客户预约后，档期和信息会同步到你的小程序后台。</p>
+      <div class="mini-code" id="miniText">#小程序://表预约/eSVGtsLeklV6qHC</div>
+      <div class="booking-actions">
+        <a class="gold" href="#小程序://表预约/eSVGtsLeklV6qHC" onclick="copyMini()">进入小程序预约</a>
+        <button class="darkbtn" onclick="copyMini()">复制小程序链接</button>
+        <a class="ghostbtn" href="index.html">返回首页</a>
+      </div>
+      <div class="steps">
+        <div class="step"><b>1. 客人预约</b><span>选择套餐、日期、时间，填写姓名和联系方式。</span></div>
+        <div class="step"><b>2. 后台同步</b><span>预约信息会进入「表预约」小程序后台，你可以直接查看。</span></div>
+        <div class="step"><b>3. 确认档期</b><span>收到定金后确认订单，避免网页本地数据不同步。</span></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    const MINI_LINK = '#小程序://表预约/eSVGtsLeklV6qHC';
+    function copyMini(){
+      if(navigator.clipboard){
+        navigator.clipboard.writeText(MINI_LINK).then(()=>alert('已复制小程序预约链接。若没有自动打开，请打开微信粘贴发送/打开。'));
+      }else{
+        alert(MINI_LINK);
+      }
+    }
+  </script>
+</body>
+</html>
