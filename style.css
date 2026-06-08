@@ -501,13 +501,8 @@ body{
     margin-left:7vw !important;
     transform:translateY(-130px) !important;
   }
-  .hero-name{
-    font-size:22px;
-  }
-  .hero-role{
-    font-size:13px;
-    margin-bottom:24px;
-  }
+  .hero-name{font-size:22px;}
+  .hero-role{font-size:13px;margin-bottom:24px;}
   .hero-brand-block h1{
     font-size:36px !important;
     max-width:320px;
@@ -524,9 +519,7 @@ body{
     margin-left:7vw !important;
     transform:translateY(-145px) !important;
   }
-  .hero-name{
-    font-size:20px;
-  }
+  .hero-name{font-size:20px;}
   .hero-role{
     font-size:12px;
     letter-spacing:.12em;
@@ -537,8 +530,79 @@ body{
     line-height:1.32 !important;
     max-width:280px;
   }
+  .hero-actions{margin-top:22px !important;}
+  .hero-actions .btn{
+    padding:10px 22px !important;
+    font-size:13px !important;
+  }
+}
+
+
+/* ===== V9 首页去重：导航保留，Hero只保留口号 ===== */
+.hero-slogan-only .hero-name,
+.hero-slogan-only .hero-role{
+  display:none !important;
+}
+
+.hero-content{
+  width: min(390px, 76vw) !important;
+  margin-left: 7vw !important;
+  padding-top: 0 !important;
+  transform: translateY(-88px) !important;
+}
+
+.hero-brand-block h1{
+  margin:0 !important;
+  max-width:390px !important;
+  font-size: clamp(32px, 3.6vw, 46px) !important;
+  line-height:1.34 !important;
+  font-weight:520 !important;
+  letter-spacing:.08em !important;
+}
+
+.hero-actions{
+  margin-top:26px !important;
+}
+
+.hero-actions .btn{
+  width:auto !important;
+  min-width:118px !important;
+  padding:11px 26px !important;
+  font-size:14px !important;
+  border-radius:999px !important;
+}
+
+.hero::before{
+  background:
+    linear-gradient(90deg, rgba(5,15,32,.42) 0%, rgba(5,15,32,.18) 42%, rgba(5,15,32,0) 100%),
+    linear-gradient(180deg, rgba(5,15,32,.05) 0%, rgba(5,15,32,.02) 58%, rgba(5,15,32,.18) 100%) !important;
+}
+
+@media(max-width:900px){
+  .hero-content{
+    width:70vw !important;
+    margin-left:7vw !important;
+    transform:translateY(-128px) !important;
+  }
+  .hero-brand-block h1{
+    font-size:34px !important;
+    max-width:300px !important;
+  }
+}
+
+@media(max-width:560px){
+  .hero-content{
+    width:68vw !important;
+    margin-left:7vw !important;
+    transform:translateY(-148px) !important;
+  }
+  .hero-brand-block h1{
+    font-size:28px !important;
+    line-height:1.36 !important;
+    max-width:260px !important;
+  }
   .hero-actions{
-    margin-top:22px !important;
+    margin-top:20px !important;
   }
   .hero-actions .btn{
     padding:10px 22px !important;
