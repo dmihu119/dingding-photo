@@ -242,3 +242,11 @@ body{
     text-align:center;
   }
 }
+
+
+/* ===== V4 首页高清背景图强制替换 ===== */
+.hero-bg{
+  background-image: url("images/hero.jpg") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+}
