@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>丁叮摄影｜支付定金</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif;background:#eee6dc;color:#2d2926}.top{background:#2b211b;color:#fff;padding:18px 5vw;display:flex;justify-content:space-between;align-items:center}.brand{font-size:22px;font-weight:800;letter-spacing:.08em}.top a{color:#fff;text-decoration:none}.wrap{max-width:760px;margin:0 auto;padding:22px 14px 46px}.card{background:#fff;border-radius:26px;padding:22px;box-shadow:0 14px 38px rgba(0,0,0,.08);margin-bottom:16px}.hero{background:linear-gradient(135deg,#2b211b,#6b5849);color:#fff}.hero h1{margin:0 0 10px;font-size:clamp(28px,6vw,44px)}.hero p{margin:0;line-height:1.8;opacity:.9}.info{display:grid;grid-template-columns:110px 1fr;gap:10px;line-height:1.6}.label{color:#8b7769;font-weight:700}.qr{display:block;width:min(420px,100%);margin:18px auto;border-radius:18px;border:1px solid #eadfd5}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{display:inline-flex;justify-content:center;align-items:center;text-decoration:none;border-radius:999px;padding:13px 18px;background:#2b211b;color:#fff;font-weight:700}.btn.gold{background:#d99d45;color:#21150d}.notice{background:#fffaf3;border:1px solid #ead6be;color:#68574b;border-radius:18px;padding:16px;line-height:1.8}.copy{width:100%;border:1px solid #e8ded5;border-radius:16px;padding:12px;background:#fbfaf8;white-space:pre-wrap;line-height:1.7}.small{color:#777;font-size:14px;line-height:1.7}@media(max-width:640px){.info{grid-template-columns:86px 1fr}.top{padding:14px 16px}.card{padding:18px}}
+  </style>
+</head>
+<body>
+<header class="top"><div class="brand">丁叮摄影</div><a href="photography_schedule.html">返回档期表</a></header>
+<main class="wrap">
+  <section class="card hero"><h1>支付预约定金</h1><p>请先扫码支付定金，支付后添加微信 <b>dmihu119</b> 发送付款截图。摄影师确认后，档期会改为“已预约”。</p></section>
+  <section class="card">
+    <h2>预约信息</h2>
+    <div class="info" id="info"></div>
+  </section>
+  <section class="card">
+    <h2>微信支付收款码</h2>
+    <img class="qr" src="images/wechat-pay-deposit.jpg" alt="丁叮摄影微信支付收款码">
+    <div class="notice"><b>支付备注建议填写：</b><br><span id="payNote"></span><br><br>付款后请保存截图，并发送给微信：<b>dmihu119</b>。</div>
+    <div class="btns"><a class="btn gold" href="images/wechat-pay-deposit.jpg" target="_blank">放大查看收款码</a><a class="btn" href="photography_schedule.html">返回档期表</a><a class="btn" href="index.html">返回首页</a></div>
+  </section>
+  <section class="card">
+    <h2>发给摄影师的信息</h2>
+    <div class="copy" id="copyText"></div>
+    <div class="btns"><button class="btn gold" style="border:0;cursor:pointer" onclick="copyMsg()">复制预约信息</button></div>
+    <p class="small">说明：网站静态版无法自动确认微信是否付款，最终以摄影师微信确认为准。</p>
+  </section>
+</main>
+<script>
+const q=new URLSearchParams(location.search);
+const get=k=>q.get(k)||'';
+const rows=[['日期',get('date')],['时间',get('time')],['姓名',get('name')],['微信',get('wechat')],['电话',get('phone')],['套餐',get('pkg')],['备注',get('note')]];
+document.getElementById('info').innerHTML=rows.filter(r=>r[1]).map(r=>`<div class="label">${r[0]}</div><div>${escapeHtml(r[1])}</div>`).join('');
+const note=`${get('name')||'客人'} ${get('date')} ${get('time')} 定金`;
+document.getElementById('payNote').textContent=note;
+const msg=`丁叮摄影预约定金已支付/准备支付\n日期：${get('date')}\n时间：${get('time')}\n姓名：${get('name')}\n微信：${get('wechat')}\n电话：${get('phone')}\n套餐：${get('pkg')}\n备注：${get('note')}\n我会发送付款截图，请帮我确认档期。`;
+document.getElementById('copyText').textContent=msg;
+function copyMsg(){navigator.clipboard.writeText(msg).then(()=>alert('已复制，请发给摄影师微信 dmihu119')).catch(()=>alert(msg))}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+</script>
+</body>
+</html>
