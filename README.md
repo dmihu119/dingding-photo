@@ -1,16 +1,21 @@
-# 丁叮摄影官网
+# Lethe.丁叮｜摄影预约网站
 
-已更新为商业版摄影官网：
+## 本地预览
+双击 `index.html` 即可预览。
 
-- 首页封面：浪尖上的王者
-- 作品分类：亲子时光、浪尖上的王者、海边故事
-- 真实客片瀑布流
-- 套餐价格
-- 关于摄影师
-- 微信/电话预约
+## 上传 GitHub
+1. 解压本压缩包。
+2. 打开 GitHub 仓库 `dingding-photo`。
+3. 点击 `Add file` → `Upload files`。
+4. 上传：`index.html`、`style.css`、`images` 文件夹。
+5. 点击 `Commit changes`。
 
-## 上传到 GitHub
+Vercel 会自动重新部署，通常 30 秒左右生效。
 
-把本文件夹里的所有内容上传到 GitHub 仓库根目录，覆盖原来的 `index.html` 和 `style.css`，并上传 `images` 文件夹。
+## 修改联系方式
+在 `index.html` 里搜索：
+- Lethe.丁叮
+- dmihu119
+- 13816677703
 
-Vercel 会自动重新部署。
+即可修改。
