@@ -609,3 +609,302 @@ body{
     font-size:13px !important;
   }
 }
+
+
+/* ===== V10 恢复导航 + 按钮移到底部 ===== */
+
+/* 恢复顶部导航栏 */
+.nav{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  height:72px !important;
+  padding:0 6vw !important;
+  z-index:100 !important;
+  color:#fff !important;
+  background:linear-gradient(180deg, rgba(5,15,32,.46), rgba(5,15,32,0)) !important;
+}
+
+.nav .brand{
+  display:flex !important;
+  flex-direction:column !important;
+}
+
+.nav nav{
+  display:flex !important;
+  align-items:center !important;
+  gap:24px !important;
+  white-space:nowrap !important;
+}
+
+.nav nav a{
+  display:inline-block !important;
+  color:#fff !important;
+  font-size:15px !important;
+  font-weight:600 !important;
+  opacity:.95 !important;
+}
+
+/* 首页文字继续保持精简 */
+.hero-content{
+  width:min(390px, 76vw) !important;
+  margin-left:7vw !important;
+  transform:translateY(-130px) !important;
+}
+
+/* 按钮固定在首屏底部左侧，不挡人物 */
+.hero-actions{
+  position:absolute !important;
+  left:7vw !important;
+  bottom:64px !important;
+  margin-top:0 !important;
+  display:flex !important;
+  gap:16px !important;
+  z-index:5 !important;
+}
+
+.hero-actions .btn{
+  width:auto !important;
+  min-width:126px !important;
+  padding:12px 28px !important;
+  font-size:14px !important;
+  border-radius:999px !important;
+  text-align:center !important;
+}
+
+.hero-actions .btn.ghost{
+  display:inline-block !important;
+  color:#fff !important;
+  border:1px solid rgba(255,255,255,.65) !important;
+  background:rgba(255,255,255,.08) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.hero-actions .btn.primary{
+  display:inline-block !important;
+  color:#10213a !important;
+  background:linear-gradient(135deg,#e7ad52,#f7cb79) !important;
+}
+
+/* 平板：导航保留，但缩小间距 */
+@media(max-width:900px){
+  .nav{
+    height:68px !important;
+    padding:0 5vw !important;
+  }
+  .nav nav{
+    display:flex !important;
+    gap:14px !important;
+    overflow-x:auto !important;
+    max-width:62vw !important;
+    scrollbar-width:none;
+  }
+  .nav nav::-webkit-scrollbar{display:none;}
+  .nav nav a{
+    font-size:13px !important;
+  }
+  .hero-content{
+    width:70vw !important;
+    margin-left:7vw !important;
+    transform:translateY(-150px) !important;
+  }
+  .hero-actions{
+    left:7vw !important;
+    bottom:50px !important;
+  }
+}
+
+/* 手机：顶部保留品牌，导航横向可滑动；按钮底部两列 */
+@media(max-width:560px){
+  .nav{
+    height:auto !important;
+    min-height:66px !important;
+    padding:12px 5vw !important;
+    align-items:flex-start !important;
+  }
+  .nav .brand span{
+    font-size:20px !important;
+  }
+  .nav .brand small{
+    font-size:12px !important;
+  }
+  .nav nav{
+    display:flex !important;
+    position:absolute !important;
+    left:5vw !important;
+    right:5vw !important;
+    top:64px !important;
+    max-width:none !important;
+    gap:18px !important;
+    overflow-x:auto !important;
+    padding:6px 0 !important;
+  }
+  .nav nav a{
+    font-size:12px !important;
+    opacity:.9 !important;
+  }
+  .hero-content{
+    width:68vw !important;
+    margin-left:7vw !important;
+    transform:translateY(-158px) !important;
+  }
+  .hero-actions{
+    left:7vw !important;
+    right:7vw !important;
+    bottom:34px !important;
+    gap:12px !important;
+  }
+  .hero-actions .btn{
+    flex:1 !important;
+    min-width:0 !important;
+    padding:11px 12px !important;
+    font-size:13px !important;
+  }
+}
+
+
+/* FINAL HERO LAYOUT */
+.hero-content{
+ left:0 !important;
+ margin-left:7vw !important;
+ width:360px !important;
+ transform:translateY(-180px) !important;
+}
+
+.hero-brand-block h1{
+ font-size:42px !important;
+ line-height:1.35 !important;
+ font-weight:500 !important;
+ max-width:360px !important;
+}
+
+.hero-actions{
+ position:absolute !important;
+ left:7vw !important;
+ bottom:40px !important;
+ display:flex !important;
+ gap:14px !important;
+}
+
+.nav{
+ display:flex !important;
+ visibility:visible !important;
+ opacity:1 !important;
+ z-index:999 !important;
+}
+
+@media(max-width:560px){
+ .hero-brand-block h1{
+   font-size:28px !important;
+ }
+ .hero-actions{
+   bottom:28px !important;
+ }
+}
+
+
+/* ===== V11 按钮真正固定到首页首图底部 ===== */
+.hero{
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.hero-content{
+  position: relative !important;
+  z-index: 3 !important;
+  width: min(360px, 70vw) !important;
+  margin-left: 7vw !important;
+  transform: translateY(-150px) !important;
+}
+
+.hero-brand-block h1{
+  font-size: 42px !important;
+  line-height: 1.35 !important;
+  font-weight: 500 !important;
+  letter-spacing: .08em !important;
+  max-width: 360px !important;
+}
+
+.hero-bottom-actions{
+  position: absolute !important;
+  left: 7vw !important;
+  bottom: 40px !important;
+  z-index: 6 !important;
+  display: flex !important;
+  gap: 16px !important;
+  align-items: center !important;
+}
+
+.hero-bottom-actions .btn{
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 126px !important;
+  padding: 12px 28px !important;
+  border-radius: 999px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+}
+
+.hero-bottom-actions .btn.ghost{
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.70) !important;
+  background: rgba(255,255,255,.10) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.hero-bottom-actions .btn.primary{
+  color: #11213a !important;
+  border: none !important;
+  background: linear-gradient(135deg,#e7ad52,#f7cb79) !important;
+}
+
+/* 彻底隐藏旧位置按钮，防止重复 */
+.hero-content > .hero-actions,
+.hero-brand-block > .hero-actions{
+  display: none !important;
+}
+
+/* 导航强制显示 */
+.nav,
+.nav nav,
+.nav .brand{
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.nav{
+  display: flex !important;
+  z-index: 999 !important;
+}
+.nav nav{
+  display: flex !important;
+}
+
+/* 手机适配 */
+@media(max-width: 560px){
+  .hero-content{
+    width: 68vw !important;
+    margin-left: 7vw !important;
+    transform: translateY(-150px) !important;
+  }
+  .hero-brand-block h1{
+    font-size: 28px !important;
+    line-height: 1.36 !important;
+    max-width: 260px !important;
+  }
+  .hero-bottom-actions{
+    left: 7vw !important;
+    right: 7vw !important;
+    bottom: 28px !important;
+    gap: 12px !important;
+  }
+  .hero-bottom-actions .btn{
+    flex: 1 !important;
+    min-width: 0 !important;
+    padding: 11px 12px !important;
+    font-size: 13px !important;
+  }
+}
