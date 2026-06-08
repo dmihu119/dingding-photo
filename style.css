@@ -341,3 +341,207 @@ body{
     font-size: 14px !important;
   }
 }
+
+
+/* ===== V7 首页极简版：少字、不挡人物 ===== */
+.hero-content{
+  width: min(430px, 78vw) !important;
+  margin-left: 7vw !important;
+  padding-top: 0 !important;
+  transform: translateY(-70px) !important;
+}
+
+.hero-content .eyebrow{
+  font-size: clamp(13px, 1.1vw, 16px) !important;
+  margin-bottom: 14px !important;
+  letter-spacing: .18em !important;
+  font-weight: 500 !important;
+  opacity: .92 !important;
+}
+
+.hero-content h1{
+  max-width: 430px !important;
+  font-size: clamp(34px, 4vw, 54px) !important;
+  line-height: 1.18 !important;
+  font-weight: 600 !important;
+  letter-spacing: .04em !important;
+}
+
+.hero-content .subtitle{
+  display:none !important;
+}
+
+.hero-actions{
+  margin-top: 24px !important;
+}
+
+.hero-actions .btn.ghost{
+  display:none !important;
+}
+
+.btn{
+  min-width: 120px !important;
+  padding: 12px 24px !important;
+  font-size: 14px !important;
+}
+
+.hero::before{
+  background:
+    linear-gradient(90deg, rgba(5,15,32,.45) 0%, rgba(5,15,32,.18) 42%, rgba(5,15,32,0) 100%),
+    linear-gradient(180deg, rgba(5,15,32,.08) 0%, rgba(5,15,32,.02) 55%, rgba(5,15,32,.22) 100%) !important;
+}
+
+@media(max-width: 900px){
+  .hero-content{
+    width: 72vw !important;
+    margin-left: 7vw !important;
+    transform: translateY(-110px) !important;
+  }
+  .hero-content h1{
+    font-size: clamp(30px, 8vw, 42px) !important;
+    max-width: 330px !important;
+  }
+}
+
+@media(max-width: 560px){
+  .hero{
+    min-height: 620px !important;
+    height: 82vh !important;
+  }
+  .hero-content{
+    width: 70vw !important;
+    margin-left: 7vw !important;
+    transform: translateY(-135px) !important;
+  }
+  .hero-content .eyebrow{
+    font-size: 13px !important;
+    margin-bottom: 10px !important;
+  }
+  .hero-content h1{
+    font-size: 32px !important;
+    line-height: 1.22 !important;
+    max-width: 280px !important;
+  }
+  .hero-actions{
+    margin-top: 18px !important;
+  }
+  .btn{
+    width:auto !important;
+    min-width: 110px !important;
+    padding: 11px 22px !important;
+    font-size: 13px !important;
+  }
+}
+
+
+/* ===== V8 首页品牌口号版 ===== */
+.hero-content{
+  width: min(420px, 80vw) !important;
+  margin-left: 7vw !important;
+  padding-top: 0 !important;
+  transform: translateY(-118px) !important;
+}
+
+.hero-brand-block{
+  color:#fff;
+  text-shadow: 0 4px 26px rgba(0,0,0,.34);
+}
+
+.hero-name{
+  margin:0 0 7px 0;
+  font-size: clamp(20px, 2.1vw, 28px);
+  line-height:1.25;
+  font-weight: 650;
+  letter-spacing:.06em;
+}
+
+.hero-role{
+  margin:0 0 30px 0;
+  font-size: clamp(13px, 1.15vw, 16px);
+  line-height:1.5;
+  font-weight:400;
+  letter-spacing:.14em;
+  opacity:.86;
+}
+
+.hero-brand-block h1{
+  margin:0;
+  max-width:420px;
+  font-size: clamp(34px, 4.2vw, 52px) !important;
+  line-height:1.28 !important;
+  font-weight:560 !important;
+  letter-spacing:.08em !important;
+}
+
+.hero-actions{
+  margin-top:30px !important;
+}
+
+.hero-actions .btn{
+  width:auto !important;
+  min-width:118px !important;
+  padding:12px 26px !important;
+  font-size:14px !important;
+  border-radius:999px !important;
+}
+
+.hero-actions .btn.ghost{
+  display:none !important;
+}
+
+.hero::before{
+  background:
+    linear-gradient(90deg, rgba(5,15,32,.48) 0%, rgba(5,15,32,.22) 42%, rgba(5,15,32,0) 100%),
+    linear-gradient(180deg, rgba(5,15,32,.06) 0%, rgba(5,15,32,.02) 58%, rgba(5,15,32,.22) 100%) !important;
+}
+
+@media(max-width:900px){
+  .hero-content{
+    width:74vw !important;
+    margin-left:7vw !important;
+    transform:translateY(-130px) !important;
+  }
+  .hero-name{
+    font-size:22px;
+  }
+  .hero-role{
+    font-size:13px;
+    margin-bottom:24px;
+  }
+  .hero-brand-block h1{
+    font-size:36px !important;
+    max-width:320px;
+  }
+}
+
+@media(max-width:560px){
+  .hero{
+    min-height:620px !important;
+    height:82vh !important;
+  }
+  .hero-content{
+    width:72vw !important;
+    margin-left:7vw !important;
+    transform:translateY(-145px) !important;
+  }
+  .hero-name{
+    font-size:20px;
+  }
+  .hero-role{
+    font-size:12px;
+    letter-spacing:.12em;
+    margin-bottom:22px;
+  }
+  .hero-brand-block h1{
+    font-size:30px !important;
+    line-height:1.32 !important;
+    max-width:280px;
+  }
+  .hero-actions{
+    margin-top:22px !important;
+  }
+  .hero-actions .btn{
+    padding:10px 22px !important;
+    font-size:13px !important;
+  }
+}
